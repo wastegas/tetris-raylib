@@ -1,8 +1,8 @@
 #include "raylib.h"
 #include <stdlib.h>
 
-#define ROWS 30
-#define COLS 20
+#define ROWS 300
+#define COLS 400
 #define FPS  60
 
 int main(void) {
@@ -12,7 +12,7 @@ int main(void) {
   while (!WindowShouldClose()) {
     BeginDrawing(); // start drawing
     ClearBackground(RAYWHITE); // clear background
-    EndDrawing()
+    EndDrawing();
   }
 
   CloseWindow();
