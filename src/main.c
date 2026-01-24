@@ -107,8 +107,8 @@ static void resetPiece(void) {
 
 static int collision(int nx, int ny, int nrot) {
   for (int i = 0; i < 4; i++) {
-    int gx = nx + tetronimo[cur.type][nrot][i].x;
-    int gy = ny + tetronimo[cur.type][nrot][i].y;
+    int gx = nx + tetromino[cur.type][nrot][i].x;
+    int gy = ny + tetromino[cur.type][nrot][i].y;
     if (gx < 0 || gx >= COLS || gy < 0 || gy > ROWS) return 1;
     if (cur.grid[gx][gy]) return 1;
   }
@@ -117,8 +117,8 @@ static int collision(int nx, int ny, int nrot) {
 
 static void lockPiece(void) {
   for (int i = 0; i < 4; i++) {
-    int gx = cur.x + tetronimo[cur.type][cur.rot][i].x;
-    int gy = cur.y + tetronimo[cur.type][cur.rot][i].y;
+    int gx = cur.x + tetromino[cur.type][cur.rot][i].x;
+    int gy = cur.y + tetromino[cur.type][cur.rot][i].y;
     cur.grid[gx][gy] = cur.type + 1;
   }
 
