@@ -138,7 +138,7 @@ static void lockPiece(void) {
   }
   resetPiece();
   if (collision(cur.x, cur.y, cur.rot))
-    gameover = true;
+    gameOver = true;
 }
 
 static void hardDrop(void) {
@@ -147,7 +147,7 @@ static void hardDrop(void) {
   lockPiece();
 }
 
-static void rotatePiece(in dir) {
+static void rotatePiece(int dir) {
   int nrot = (cur.rot + dir) & 3;
   if (!collision(cur.x, cur.y, nrot)) cur.rot = nrot;
 }
