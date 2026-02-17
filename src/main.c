@@ -180,7 +180,7 @@ int main(void) {
     dropCounter++;
     if (dropCounter >= FPS/FPS_DROP) {
       dropCounter = 0;
-      if (!collision(cur.x, cur.y+1, cor.rot))
+      if (!collision(cur.x, cur.y+1, cur.rot))
 	cur.y++;
       else
 	lockPiece();
