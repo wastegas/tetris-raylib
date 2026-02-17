@@ -1,10 +1,11 @@
-#include "raylib.h"
+#include  "raylib.h"
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 
 #define ROWS 300
 #define COLS 400
+#define BLOCK 32
 #define FPS  60
 #define FPS_DROP 5 // drop frames per second
 
@@ -195,7 +196,7 @@ int main(void) {
 	if (cur.grid[r][c]) {
 	  DrawRectangle(c*BLOCK, r*BLOCK, BLOCK, BLOCK,
 			colors[cur.grid[r][c]-1]);
-	  DrawRectagleLines(c*BLOCK, r*BLOCK, BLOCK, BLOCK,
+	  DrawRectangleLines(c*BLOCK, r*BLOCK, BLOCK, BLOCK,
 			    DARKGRAY);
 	}
       }
