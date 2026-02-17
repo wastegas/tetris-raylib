@@ -155,7 +155,7 @@ static void rotatePiece(int dir) {
 }
 
 int main(void) {
-  InitWindow(COLS, ROWS, "Tetris - Raylib");
+  InitWindow(COLS*BLOCK+1, ROWS*BLOCK+1, "Tetris - Raylib");
   SetTargetFPS(FPS);
   srand((unsigned)time(0));
 
