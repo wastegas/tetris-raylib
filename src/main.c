@@ -6,6 +6,7 @@
 #define ROWS 300
 #define COLS 400
 #define FPS  60
+#define FPS_DROP 5 // drop frames per second
 
 /* some coordinate for tetromino */
 typedef struct {
