@@ -155,10 +155,68 @@ static void rotatePiece(int dir) {
 int main(void) {
   InitWindow(COLS, ROWS, "Tetris - Raylib");
   SetTargetFPS(FPS);
+  srand((unsigned)time(0));
+
+  cur.grid[0][0] = 0;
+  resetPiece();
   
   while (!WindowShouldClose()) {
+    // detect keyboard input
+    if (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT))
+      if (!collision(cur.x-1, cur.y, cur.rot)) cur.x--;
+    if (IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT))
+      if (!collision(cur.x+1, cur.y, cur.rot)) cur.x++;
+    if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP))
+      rotatePiece(1);
+    if (IsKeyPressed(KEY_Z))
+      rotatePiece(-1);
+    if (IsKeyPressed(KEY_SPACE))
+      hardDrop();
+    if (IsKeyDown(KEY_S))
+      dropCounter = FPS; // turbo drop
+
+    // auto drop
+    dropCounter++;
+    if (dropCounter >= FPS/FPS_DROP) {
+      dropCounter = 0;
+      if (!collision(cur.x, cur.y+1, cor.rot))
+	cur.y++;
+      else
+	lockPiece();
+    }
+
+    // render screen    
     BeginDrawing(); // start drawing
-    ClearBackground(RAYWHITE); // clear background
+    ClearBackground(BLACK); // clear background
+    // draw grid
+    for (int r = 0; r < ROWS; r++)
+      for (int c = 0; c < COLS; c++) {
+	if (cur.grid[r][c]) {
+	  DrawRectangle(c*BLOCK, r*BLOCK, BLOCK, BLOCK,
+			colors[cur.grid[r][c]-1]);
+	  DrawRectagleLines(c*BLOCK, r*BLOCK, BLOCK, BLOCK,
+			    DARKGRAY);
+	}
+      }
+
+    // draw current piece
+    for (int i = 0; i < 4; i++) {
+      int gx = cur.x + tetromino[cur.type][cur.rot][i].x;
+      int gy = cur.y + tetromino[cur.type][cur.rot][i].y;
+      if (gy >= 0) { // stay withing top of screen
+	DrawRectangle(gx*BLOCK, gy*BLOCK, BLOCK, BLOCK,
+		      colors[cur.type]);
+	DrawRectangleLines(gx*BLOCK, gy*BLOCK, BLOCK, BLOCK,
+			   DARKGRAY);
+      }
+    }
+
+    // draw score and game over
+    DrawText(TextFormat("Score: %d", score), 10, 4, 20, LIGHTGRAY);
+    if (gameOver) {
+      DrawText("GAME OVER", COLS*BLOCK/2-70, ROWS*BLOCK/2-20,
+	       40, RED);
+    }
     EndDrawing();
   }
 
