@@ -121,7 +121,7 @@ static void lockPiece(void) {
   for (int i = 0; i < 4; i++) {
     int gx = cur.x + tetromino[cur.type][cur.rot][i].x;
     int gy = cur.y + tetromino[cur.type][cur.rot][i].y;
-    cur.grid[gx][gy] = cur.type + 1;
+    cur.grid[gy][gx] = cur.type + 1;
   }
 
   /* clear full rows */
