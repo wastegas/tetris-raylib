@@ -112,7 +112,7 @@ static int collision(int nx, int ny, int nrot) {
     int gx = nx + tetromino[cur.type][nrot][i].x;
     int gy = ny + tetromino[cur.type][nrot][i].y;
     if (gx < 0 || gx >= COLS || gy < 0 || gy > ROWS) return 1;
-    if (cur.grid[gx][gy]) return 1;
+    if (cur.grid[gy][gx]) return 1;
   }
   return 0;
 }
